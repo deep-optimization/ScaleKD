@@ -79,7 +79,7 @@ bash tools/dist_test.sh configs/deit/deit-tiny_pt-4xb256_in1k.py $new_mmcls_ckpt
 ## Citation
 ```
 @article{fan2024scalekd,
-  title={ScaleKD: Strong Vision Transformers Could Be Excellent Teachers},
+  title={ScaleKD: Strong Vision Transformers Could Be Excellent Teachersaa},
   author={Fan, Jiawei and Li, Chao and Liu, Xiaolong and Yao, Anabang},
   journal={Thirty-eighth Conference on Neural Information Processing Systems},
   year={2024}
