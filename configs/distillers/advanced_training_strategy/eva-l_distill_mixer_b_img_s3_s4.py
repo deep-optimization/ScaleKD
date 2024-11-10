@@ -21,7 +21,7 @@ model = dict(
     use_logit = use_logit,
     is_vit = is_vit,
     sync_bn=False,
-    teacher_pretrained = 'ckpt/eva-l-p14_mim-in21k-pre_3rdparty_in1k-196px_20221213-b730c7e7.pth',
+    teacher_pretrained = 'https://download.openmmlab.com/mmclassification/v0/eva/eva-l-p14_mim-in21k-pre_3rdparty_in1k-196px_20221213-b730c7e7.pth',
     teacher_cfg = 'configs/eva/eva-l-p14_8xb16_in1k-224px.py',
     student_cfg ='configs/mlp_mixer/mlp-mixer-base-p14_64xb64_in1k.py',
     distill_cfg = [dict(methods=[dict(type='FreqMaskingDistillLoss',

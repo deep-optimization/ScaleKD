@@ -20,7 +20,7 @@ model = dict(
     use_logit = use_logit,
     is_vit = is_vit,
     sync_bn=False,
-    teacher_pretrained = 'ckpt/eva-l-p14_mim-in21k-pre_3rdparty_in1k-336px_20221213-f25b7634.pth',
+    teacher_pretrained = 'https://download.openmmlab.com/mmclassification/v0/eva/eva-l-p14_mim-in21k-pre_3rdparty_in1k-336px_20221213-f25b7634.pth',
     teacher_cfg = 'configs/eva/eva-l-p14_8xb16_in1k-336px.py',
     student_cfg ='configs/eva/eva-02-s_in1k-336px.py',
     distill_cfg = [dict(methods=[dict(type='FreqMaskingDistillLoss',

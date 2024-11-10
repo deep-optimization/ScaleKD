@@ -4,21 +4,53 @@ By Jiawei Fan, Chao Li, Xiaolong Liu and Anbang Yao.
 This repository is the official PyTorch implementation 
 ScaleKD ([ScaleKD: Strong Vision Transformers Could Be Excellent Teachers](https://openreview.net/pdf?id=0WCFI2Qx85)) published in NeurIPS 2024.
 
+
+## Updates
+
+**2024/11/10:** We publish the the project of ScaleKD, containing basic training and evaluation code.    
+
 ## Introduction
 
 In this paper, we question if well pre-trained vision transformer (ViT) models could be used as teachers that exhibit scalable properties 
-to advance cross architecture knowledge distillation research, in the context of adopting mainstream large-scale visual recognition datasets for evaluation. To make this possible, our analysis underlines the importance of seeking effective strategies to align (1) feature computing paradigm differences, (2) model scale differences, and (3) knowledge density differences. By combining three closely coupled components namely *cross attention projector*, *dual-view feature mimicking* and *teacher parameter perception* tailored to address the alignment problems stated above, we present a simple and effective knowledge distillation method, called *ScaleKD*. Our method can train student backbones that span across a variety of convolutional neural network (CNN), multi-layer perceptron (MLP), and ViT architectures on image classification datasets, achieving state-of-the-art knowledge distillation performance. 
+to advance cross architecture knowledge distillation research, in the context of adopting mainstream large-scale visual recognition datasets 
+for evaluation. To make this possible, our analysis underlines the importance of seeking effective strategies to align 
+(1) feature computing paradigm differences, (2) model scale differences, and (3) knowledge density differences. 
+By combining three closely coupled components namely *cross attention projector*, *dual-view feature mimicking* 
+and *teacher parameter perception* tailored to address the alignment problems stated above, 
+we present a simple and effective knowledge distillation method, called *ScaleKD*. 
+Our method can train student backbones that span across a variety of convolutional neural network (CNN), 
+multi-layer perceptron (MLP), and ViT architectures on image classification datasets, 
+achieving state-of-the-art knowledge distillation performance. 
+For instance, taking a well pre-trained Swin-L as the teacher model,
+our method gets 75.15%|82.03%|84.16%|78.63%|81.96%|83.93%|83.80%|85.53%
+top-1 accuracies for MobileNet-V1|ResNet-50|ConvNeXt-T|Mixer-S/16|MixerB/16|ViT-S/16|Swin-T|ViT-B/16 models trained on ImageNet-1K dataset from
+scratch, showing 3.05%|3.39%|2.02%|4.61%|5.52%|4.03%|2.62%|3.73% absolute
+gains to the individually trained counterparts. Intriguingly, when scaling up the size
+of teacher models or their pre-training datasets, our method showcases the desired
+scalable properties, bringing increasingly larger gains to student models. We also
+empirically show that the student backbones trained by our method transfer well
+on downstream MS-COCO and ADE20K datasets. More importantly, our method
+could be used as a more efficient alternative to the time-intensive pre-training
+paradigm for any target student model on large-scale datasets if a strong pre-trained
+ViT is available, reducing the amount of viewed training samples up to 195×.
 
 ![architecture](imgs/teaser.png)
 Overview of three core components in our ScaleKD, which are (a) cross attention projector,
 (b) dual-view feature mimicking, and (c) teacher parameter perception. Note that the teacher model
 is frozen in the distillation process and there is no modification to the student’s model at inference.
 
+## Table of content
+- [Environment](#environment)
+- [Prepare datasets](#dataset)
+- [Training](#training)
+- [Testing](#testing)
+- [Transfering Models](#transfer)
+
 
 
 ## Requirement and Dataset
 
-### Environment
+### <span id="environment">Environment</span>
 - Python 3.8 (Anaconda is recommended)
 - CUDA 11.1
 - PyTorch 1.10.1
@@ -32,7 +64,7 @@ pip install -r requirements.txt
 *Note that using pytorch with higher CUDA version may result in low training speed.*
 
 
-### Prepare datasets
+### <span id="dataset">Prepare datasets</span> 
 - Following [this repository](https://github.com/pytorch/examples/tree/main/imagenet#requirements),
 - Download the ImageNet dataset from http://www.image-net.org/.
 - Then, move and extract the training and validation images to labeled subfolders, using [the following script](https://github.com/pytorch/examples/blob/main/imagenet/extract_ILSVRC.sh).
@@ -40,7 +72,7 @@ pip install -r requirements.txt
 
 
 
-## How to apply ScaleKD to various teacher-student network pairs
+## <span id="training">How to apply ScaleKD to various teacher-student network pairs</span>
 Basically, we peform our experiments on two different training strategies. 
 
 ### Training with traditional training strategy
@@ -80,31 +112,34 @@ Basically, we peform our experiments on two different training strategies.
   ```
 
 
+### <span id="testing"> Testing the distilled models</span> 
+- Please use the following command to test the performance of models:
+  ```
+   bash tools/dist_test.sh $CONFIG_PATH $CKPT_PATH 8 --metrics accuracy
+  ```
+- If you wish to test the originally saved checkpoint, please use the same config as training. And if your checkpoint has been already transferred to student, please use the config as the baseline.
 
-
-## Transfering checkpoints
+### <span id="transfer"> Obtaining the student weight </span>
+Tansfer the distillation model into mmcls (mmpretrain) model
 ```
-# Tansfer the Distillation model into mmcls model
-python pth_transfer.py --dis_path $dis_ckpt --output_path $new_mmcls_ckpt
-```
-
-## Testing
-
-```
-#multi GPU
-bash tools/dist_test.sh configs/deit/deit-tiny_pt-4xb256_in1k.py $new_mmcls_ckpt 8 --metrics accuracy
+python pth_transfer.py --dis_path $CKPT_PATH --output_path $NEW_CKPT_PATH
 ```
 
 
-## Results
-<img src="imgs/results.png" width="950px"/>
 
 
-<!-- |  Model   | Teacher  | T_weight  | Baseline | ViTKD | weight | ViTKD+NKD | weight |                            dis_config                            |
-| :------: | :-------: | :-------: | :----------------: | :------------: | :--: | :--: | :--: | :----------------------------------------------------------: |
-|   DeiT-Tiny   | DeiT III-Small | [baidu](https://pan.baidu.com/s/1asMuS6E7OmdZzQBH9ugCZg?pwd=83x7)/[one drive](https://1drv.ms/u/s!Ah7OVljahSArnWHFQNy6OqrZoA82?e=eQ4kmI) |        74.42        |      76.06 (+1.64)      |[baidu](https://pan.baidu.com/s/1OYGeZ2P8RRdEIWM3diyzQA?pwd=niiw)/[one drive](https://1drv.ms/u/s!Ah7OVljahSArnVz0irqzX2VP0tg_?e=75Vfs6) |77.78 (+3.36)| [baidu](https://pan.baidu.com/s/1StOAQziPEvvHzQqWvy20vQ?pwd=emct)/[one drive](https://1drv.ms/u/s!Ah7OVljahSArnV1cQsVw9SHvSWpG?e=RuE1aL) | [config](https://github.com/yzd-v/cls_KD/blob/master/configs/distillers/imagenet/deit-s3_distill_deit-t_img.py) |
-|   DeiT-Small   | DeiT III-Base | [baidu](https://pan.baidu.com/s/15HNMudacNlBUCZ6ySFhENg?pwd=6mmp)/[one drive](https://1drv.ms/u/s!Ah7OVljahSArnWTTrFh-ST9BcHb8?e=wj3iqH) |        80.55        |      81.95 (+1.40)      |[baidu](https://pan.baidu.com/s/17O64Q4py6Ex1ohjnrPpiew?pwd=4srr)/[one drive](https://1drv.ms/u/s!Ah7OVljahSArnV4Fb5EIZEf81PxK?e=K7M1Sz) |83.59 (+3.04)| [baidu](https://pan.baidu.com/s/1OThOyOR60CCxszxB6rY4QQ?pwd=4x90)/[one drive](https://1drv.ms/u/s!Ah7OVljahSArnV_tNpvVZ21Yc9eM?e=vlYr8K) | [config](https://github.com/yzd-v/cls_KD/blob/master/configs/distillers/imagenet/deit-b3_distill_deit-s_img.py) |
-|   DeiT-Base   | DeiT III-Large | [baidu](https://pan.baidu.com/s/1qdgcTMz_FeBfEH2rchh_yg?pwd=n5hf)/[one drive](https://1drv.ms/u/s!Ah7OVljahSArnWaR3tslskypZbwB?e=D1aL6p) |        81.76        |      83.46 (+1.70)      |[baidu](https://pan.baidu.com/s/1Qytl5BHpc3qdlYSQq750FQ?pwd=ej2k)/[one drive](https://1drv.ms/u/s!Ah7OVljahSArnWMMyJZT2NlsIgBg?e=JM5L9h) |85.41 (+3.65)| [baidu](https://pan.baidu.com/s/19Zxq4g3Z1mGhDPjkbG_t0g?pwd=q915)/[one drive](https://1drv.ms/u/s!Ah7OVljahSArnWJvNpY3Feo_OvGi?e=iPuWJu) | [config](https://github.com/yzd-v/cls_KD/blob/master/configs/distillers/imagenet/deit-l3_distill_deit-b_img.py) | -->
+
+## Main Results on ImageNet-1K
+
+
+<!-- <img src="imgs/results.png" width="950px"/> -->
+
+
+|  Model   | Teacher  | Distillation Configurations | Epochs |Top-1 (%) | Weight |
+| :------: | :-------: | :-------: | :----------------: | :------------: | :-------: | 
+|   ResNet-50   | Swin_L | `configs/distillers/advanced_training_strategy/swin-l_distill_res50_img_s3_s4.py`| 300/600 | 82.03/82.55 | Google Drive |
+|   ViT-B   | Swin-L | `configs/distillers/advanced_training_strategy/swin-l_distill_deit-b_img_s3_s4.py` | 300 | 85.53 |Google Drive|
+
 
 
 
