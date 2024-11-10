@@ -1,0 +1,5 @@
+/ckpt
+/data
+/work_dirs
+*.pyc
+*.pkl
