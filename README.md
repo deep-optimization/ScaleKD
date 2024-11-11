@@ -7,7 +7,7 @@ ScaleKD ([ScaleKD: Strong Vision Transformers Could Be Excellent Teachers](https
 
 ## Updates
 
-**2024/11/10:** We publish the the project of ScaleKD, containing basic training and evaluation code. 
+**2024/11/10:** We release the the project of ScaleKD, containing our very basic training and evaluation code. 
 
 *We are preparing to release more distilled models on ImageNet-1K and training code on downstream tasks*
 
