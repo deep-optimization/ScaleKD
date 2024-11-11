@@ -4,3 +4,4 @@
 *.pyc
 *.pkl
 reference.md
+/configs/distillers/next_week

@@ -1,15 +1,18 @@
 # ScaleKD: Strong Vision Transformers Could Be Excellent Teachers
 By Jiawei Fan, Chao Li, Xiaolong Liu and Anbang Yao.
 
-This repository is the official PyTorch implementation 
+This repository is the official PyTorch implementation of
 ScaleKD ([ScaleKD: Strong Vision Transformers Could Be Excellent Teachers](https://openreview.net/pdf?id=0WCFI2Qx85)) published in NeurIPS 2024.
 
 
-## Updates
+## Update News
 
-**2024/11/10:** We release the the project of ScaleKD, containing our very basic training and evaluation code. 
+**Stay tuned:** We are preparing to release more distilled models on ImageNet-1K and training code on downstream tasks.
 
-*We are preparing to release more distilled models on ImageNet-1K and training code on downstream tasks*
+- **2024/11/11:** We release two distilled models, ViT-B/16 and ResNet-50. 
+- **2024/11/10:** We release the project of ScaleKD, containing our very basic training and evaluation code. 
+
+
 
 ## Introduction
 
@@ -45,6 +48,7 @@ is frozen in the distillation process and there is no modification to the studen
 - [Environment](#environment)
 - [Prepare datasets](#dataset)
 - [Training](#training)
+- [Model Zoo](#zoo)
 - [Testing](#testing)
 - [Transfering Models](#transfer)
 
@@ -59,6 +63,11 @@ is frozen in the distillation process and there is no modification to the studen
 - Torchvision 0.11.2
 
 ```
+# create conda environment
+conda create -n openmmlab python=3.8
+# enter the environment
+conda activate openmmlab
+# install packages
 pip install torch==1.10.1+cu111 torchvision==0.11.2+cu111 torchaudio==0.10.1 -f https://download.pytorch.org/whl/cu111/torch_stable.html
 pip install -r requirements.txt
 ```
@@ -113,6 +122,14 @@ Basically, we peform our experiments on two different training strategies.
     bash tools/dist_train.sh $CONFIG_PATH $NUM_GPU
   ```
 
+### <span id="zoo"> Model zoo of distilled models </span>
+We also provide some state-of-the-art models trained by our ScaleKD.
+
+|  Model   | Teacher  | Distillation Configurations | Epochs |Top-1 (%) | Weight |
+| :------: | :-------: | :-------: | :----------------: | :------------: | :-------: | 
+|   ResNet-50   | Swin_L | `configs/distillers/advanced_training_strategy/swin-l_distill_res50_img_s3_s4.py`| 300/600 | 82.03/82.55 | [Google Drive](https://drive.google.com/drive/folders/1K21te80sx3F4YPb7L2QC5tlGKfkQI9Aj?usp=drive_link) |
+|   ViT-B/16   | Swin-L | `configs/distillers/advanced_training_strategy/swin-l_distill_deit-b_img_s3_s4.py` | 300 | 85.53 |[Google Drive](https://drive.google.com/file/d/1u1De3OLNYfJt0wRpCQP4V228S1TORYVp/view?usp=drive_link)|
+
 
 ### <span id="testing"> Testing the distilled models</span> 
 - Please use the following command to test the performance of models:
@@ -131,16 +148,22 @@ python pth_transfer.py --dis_path $CKPT_PATH --output_path $NEW_CKPT_PATH
 
 
 
-## Main Results on ImageNet-1K
+## Main Results
+
+### Results on ImageNet-1K
+
+<div align=center> <img src="imgs/IN-1K.png" width="770px"/> </div> 
+
+### Transfer learning on Downsteam tasks
+
+#### Object Detection and Instance Segmentation on MS-COCO
+<div align=center> <img src="imgs/MS-COCO.png" width="750px"/> </div> 
+
+#### Semantic Segmentation on ADE20K
+<div align=center> <img src="imgs/ADE-20K.png" width="420px"/> </div> 
 
 
-<!-- <img src="imgs/results.png" width="950px"/> -->
 
-
-|  Model   | Teacher  | Distillation Configurations | Epochs |Top-1 (%) | Weight |
-| :------: | :-------: | :-------: | :----------------: | :------------: | :-------: | 
-|   ResNet-50   | Swin_L | `configs/distillers/advanced_training_strategy/swin-l_distill_res50_img_s3_s4.py`| 300/600 | 82.03/82.55 | Google Drive |
-|   ViT-B   | Swin-L | `configs/distillers/advanced_training_strategy/swin-l_distill_deit-b_img_s3_s4.py` | 300 | 85.53 |Google Drive|
 
 
 
@@ -154,6 +177,10 @@ python pth_transfer.py --dis_path $CKPT_PATH --output_path $NEW_CKPT_PATH
   year={2024}
 }
 ```
+
+
+## License
+ScaleKD is released under the Apache license. We encourage use for both research and commercial purposes, as long as proper attribution is given.
 
 
 ## Acknowledgement
