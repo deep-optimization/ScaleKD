@@ -84,7 +84,7 @@ pip install -r requirements.txt
 
 
 ## <span id="training">How to apply ScaleKD to various teacher-student network pairs</span>
-Basically, we peform our experiments on two different training strategies. 
+Basically, we peform our experiments with two different training strategies. 
 
 ### Training with traditional training strategy
 - The experiments based on the traditional training strategy are performed on 8 GPUs from a single node.
