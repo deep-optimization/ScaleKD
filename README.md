@@ -72,7 +72,7 @@ pip install torch==1.10.1+cu111 torchvision==0.11.2+cu111 torchaudio==0.10.1 -f 
 pip install -r requirements.txt
 ```
 
-*Note that using pytorch with higher CUDA version may result in low training speed.*
+*Note that using pytorch with higher CUDA versions may result in low training speed.*
 
 
 ### <span id="dataset">Prepare datasets</span> 
