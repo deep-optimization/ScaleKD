@@ -17,7 +17,7 @@
 By Jiawei Fan, Chao Li, Xiaolong Liu and Anbang Yao.
 
 This repository is the official PyTorch implementation of
-ScaleKD: Strong Vision Transformers Could Be Excellent Teachers ([paper](https://openreview.net/pdf?id=0WCFI2Qx85), [project](https://deep-optimization.github.io/scalekd/)) published in NeurIPS 2024.
+ScaleKD: Strong Vision Transformers Could Be Excellent Teachers published in NeurIPS 2024.
 
 
 ## Update News
