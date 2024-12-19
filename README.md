@@ -1,9 +1,4 @@
 # ScaleKD: Strong Vision Transformers Could Be Excellent Teachers
-
-By Jiawei Fan, Chao Li, Xiaolong Liu and Anbang Yao.
-
-This repository is the official PyTorch implementation of
-ScaleKD: Strong Vision Transformers Could Be Excellent Teachers published in NeurIPS 2024.
 <div align="center">
 
 [![demo platform](https://img.shields.io/badge/Project%20Page-Brief%20Introduction%20of%20ScaleKD-lightblue?logo=github)](https://deep-optimization.github.io/scalekd/)&nbsp;
@@ -14,6 +9,12 @@ ScaleKD: Strong Vision Transformers Could Be Excellent Teachers published in Neu
 
 
 </div>
+
+By Jiawei Fan, Chao Li, Xiaolong Liu and Anbang Yao.
+
+This repository is the official PyTorch implementation of
+ScaleKD: Strong Vision Transformers Could Be Excellent Teachers published in NeurIPS 2024.
+
 
 ![architecture](imgs/teaser.png)
 Overview of three core components in our ScaleKD, which are (a) cross attention projector,
