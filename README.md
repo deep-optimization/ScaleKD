@@ -1,4 +1,9 @@
 # ScaleKD: Strong Vision Transformers Could Be Excellent Teachers
+
+By Jiawei Fan, Chao Li, Xiaolong Liu and Anbang Yao.
+
+This repository is the official PyTorch implementation of
+ScaleKD: Strong Vision Transformers Could Be Excellent Teachers published in NeurIPS 2024.
 <div align="center">
 
 [![demo platform](https://img.shields.io/badge/Project%20Page-Brief%20Introduction%20of%20ScaleKD-lightblue?logo=github)](https://deep-optimization.github.io/scalekd/)&nbsp;
@@ -10,14 +15,15 @@
 
 </div>
 
+![architecture](imgs/teaser.png)
+Overview of three core components in our ScaleKD, which are (a) cross attention projector,
+(b) dual-view feature mimicking, and (c) teacher parameter perception. Note that the teacher model
+is frozen in the distillation process and there is no modification to the student’s model at inference.
 
 
 
 
-By Jiawei Fan, Chao Li, Xiaolong Liu and Anbang Yao.
 
-This repository is the official PyTorch implementation of
-ScaleKD: Strong Vision Transformers Could Be Excellent Teachers published in NeurIPS 2024.
 
 
 ## Update News
@@ -54,10 +60,6 @@ could be used as a more efficient alternative to the time-intensive pre-training
 paradigm for any target student model on large-scale datasets if a strong pre-trained
 ViT is available, reducing the amount of viewed training samples up to 195×.
 
-![architecture](imgs/teaser.png)
-Overview of three core components in our ScaleKD, which are (a) cross attention projector,
-(b) dual-view feature mimicking, and (c) teacher parameter perception. Note that the teacher model
-is frozen in the distillation process and there is no modification to the student’s model at inference.
 
 ## Table of content
 - [Environment](#environment)
