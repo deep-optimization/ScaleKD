@@ -144,20 +144,24 @@ Basically, we peform our experiments with two different training strategies.
 We also provide some state-of-the-art models trained by our ScaleKD.
 
 |  Model   | Teacher  | Distillation Configurations | Epochs |Top-1 (%) | Weight |
-| :------: | :-------: | :-------: | :----------------: | :------------: | :-------: | 
-|   ResNet-50   | Swin_L | `configs/distillers/advanced_training_strategy/swin-l_distill_res50_img_s3_s4.py`| 300/600 | 82.03/82.55 | [Google Drive](https://drive.google.com/drive/folders/1K21te80sx3F4YPb7L2QC5tlGKfkQI9Aj?usp=drive_link) |
+| :------: | :-------: | :-------: | :----------------: | :------------: | :-------: |
+|   Swin-T   | Swin-L | `configs/distillers/advanced_training_strategy/swin-l_distill_swin-t_img_s3_s4.py` | 300 | 83.80 |[Google Drive](https://drive.google.com/file/d/15JfCthlMgT4DB6WUeGY3jNPxgq0mf6nH/view?usp=drive_link)|
+|   ViT-S/16   | Swin-L | `configs/distillers/advanced_training_strategy/swin-l_distill_deit-s_img_s3_s4.py` | 300 | 83.93 |[Google Drive](https://drive.google.com/file/d/1BEmgyKRA5_4M7c_AOrgMIwPUTK3Q--Qm/view?usp=drive_link)|
 |   ViT-B/16   | Swin-L | `configs/distillers/advanced_training_strategy/swin-l_distill_deit-b_img_s3_s4.py` | 300 | 85.53 |[Google Drive](https://drive.google.com/file/d/1u1De3OLNYfJt0wRpCQP4V228S1TORYVp/view?usp=drive_link)|
-
+|   ResNet-50   | Swin_L | `configs/distillers/advanced_training_strategy/swin-l_distill_res50_img_s3_s4.py`| 300/600 | 82.03/82.55 | [Google Drive](https://drive.google.com/drive/folders/1K21te80sx3F4YPb7L2QC5tlGKfkQI9Aj?usp=drive_link) | 
+|   ConvNext-T   | Swin-L | `configs/distillers/advanced_training_strategy/swin-l_distill_convnext-t_img_s3_s4.py` | 300 | 84.16 |[Google Drive](https://drive.google.com/file/d/1amBDAXf-rkxjN68QxwfogdOSD9Zp5Ve1/view?usp=drive_link)|
+|   Mixer-S/16   | Swin-L | `configs/distillers/advanced_training_strategy/swin-l_distill_mixer-s_img_s3_s4.py` | 300 | 78.63 |[Google Drive](https://drive.google.com/file/d/1X8WGwCI7pYQtgD9ETBOpPqoVLvFNrxAd/view?usp=drive_link)|
+|   Mixer-B/16   | Swin-L | `configs/distillers/advanced_training_strategy/swin-l_distill_mixer-b_img_s3_s4.py` | 300 | 81.96 |[Google Drive](https://drive.google.com/file/d/1L8rquR_THuAZ-t4-OO78--YQuJiCUMwh/view?usp=drive_link)|
 
 ### <span id="testing"> Testing the distilled models</span> 
 - Please use the following command to test the performance of models:
   ```
    bash tools/dist_test.sh $CONFIG_PATH $CKPT_PATH 8 --metrics accuracy
   ```
-- If you wish to test the originally saved checkpoint, please use the same config as training. And if your checkpoint has been already transferred to student, please use the config as the baseline.
+- If you wish to test the originally saved checkpoint, please use the same configuration as the training. If your checkpoint has already been transferred to the student format, please use the config as the baseline.
 
 ### <span id="transfer"> Obtaining the student weight </span>
-Tansfer the distillation model into mmcls (mmpretrain) model
+Transfer the distillation model into mmcls (mmpretrain) model
 ```
 python pth_transfer.py --dis_path $CKPT_PATH --output_path $NEW_CKPT_PATH
 ```
@@ -172,7 +176,7 @@ python pth_transfer.py --dis_path $CKPT_PATH --output_path $NEW_CKPT_PATH
 
 <div align=center> <img src="imgs/IN-1K.png" width="770px"/> </div> 
 
-### Transfer learning on Downsteam tasks
+### Transfer learning on Downstream tasks
 
 #### Object Detection and Instance Segmentation on MS-COCO
 <div align=center> <img src="imgs/MS-COCO.png" width="750px"/> </div> 
