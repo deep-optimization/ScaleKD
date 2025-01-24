@@ -155,7 +155,7 @@ We also provide some state-of-the-art models trained by our ScaleKD.
 |   Mixer-B/16   | Swin-L | `configs/distillers/advanced_training_strategy/swin-l_distill_mixer-b_img_s3_s4.py` | 300 | 81.96 |[Google Drive](https://drive.google.com/file/d/1L8rquR_THuAZ-t4-OO78--YQuJiCUMwh/view?usp=drive_link)|
 |   ViT-B/14   | BEiT-L | `configs/distillers/advanced_training_strategy/beit-l_distill_deit-b_img_s3_s4.py` | 300 | 86.43 |[Google Drive](https://drive.google.com/file/d/1ZhT61WQtUNleYEOH4ysT2Q1GRsjWnwq4/view?usp=drive_link)|
 |   ResNet-50   | BEiT-L | `configs/distillers/advanced_training_strategy/beit-l_distill_res50_img_s3_s4.py` | 300 | 82.34 |[Google Drive](https://drive.google.com/drive/folders/1K21te80sx3F4YPb7L2QC5tlGKfkQI9Aj?usp=drive_link)|
-|   Mixer-B/14   | BEiT-L | `configs/distillers/advanced_training_strategy/beit-l_distill_mixer-b_img_s3_s4.py` | 300 | 82.88 |[Google Drive](https://drive.google.com/file/d/1KXmygXHbLhKWSXFV09TRS4Hvjxby3Emm/view?usp=drive_link)|
+|   Mixer-B/14   | BEiT-L | `configs/distillers/advanced_training_strategy/beit-l_distill_mixer-b_img_s3_s4.py` | 300 | 82.89 |[Google Drive](https://drive.google.com/file/d/1KXmygXHbLhKWSXFV09TRS4Hvjxby3Emm/view?usp=drive_link)|
 
 ### <span id="testing"> Testing the distilled models</span> 
 - Please use the following command to test the performance of models:
