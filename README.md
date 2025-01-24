@@ -29,8 +29,9 @@ is frozen in the distillation process and there is no modification to the studen
 
 ## Update News
 
-**Stay tuned:** We are preparing to release more distilled models on ImageNet-1K and training code on downstream tasks.
+**Stay tuned:** We are preparing to release and training code on downstream tasks.
 
+- **2025/01/24:** We release the training scripts and more distilled models on ImageNet-1K.
 - **2024/11/11:** We release two distilled models, ViT-B/16 and ResNet-50. 
 - **2024/11/10:** We release the project of ScaleKD, containing our very basic training and evaluation code. 
 
