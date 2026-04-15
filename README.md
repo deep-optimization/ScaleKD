@@ -132,9 +132,9 @@ Basically, we peform our experiments with two different training strategies.
   # Node 2
   bash run.sh configs/distillers/advanced_training_strategy/swin-l_distill_res50_img_s3_s4.py 8 1
   # Node 3
-  bash run.sh configs/distillers/advanced_training_strategy/swin-l_distill_res50_img_s3_s4.py 8 2
+  bash run.sh configs/distillers/advanced_training_strategy/swin-l_distill_res50_img_s3_s4.py 8 3
   # Node 4
-  bash run.sh configs/distillers/advanced_training_strategy/swin-l_distill_res50_img_s3_s4.py 8 2
+  bash run.sh configs/distillers/advanced_training_strategy/swin-l_distill_res50_img_s3_s4.py 8 4
   ```
 - If you want to adapt these experiments to a single node, please adjust the batch size or learning rate accordingly. And then use similar command as above:
   ```
